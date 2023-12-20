@@ -13,17 +13,22 @@ const pickHeaders = (headers: Headers, keys: (string | RegExp)[]): Headers => {
   return picked;
 };
 
-export default async function handleRequest(request: NextRequest & { nextUrl?: URL }) {
+export default async function handleRequest(request: NextRequest & { nextUrl?: URL }, response: NextResponse) {
   const CORS_HEADERS: Record<string, string> = {
     "Access-Control-Allow-Origin": request.headers.get("origin") || "*",
     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type, Authorization",
   };
   
-  if (request.method === "OPTIONS") {
-    return new Response(null, {
-      headers: CORS_HEADERS,
-    });
+  // if (request.method === "OPTIONS") {
+  //   return new Response(null, {
+  //     headers: CORS_HEADERS,
+  //   });
+  // }
+  if(req.method === 'OPTIONS') {
+      return response.status(200).json(({
+          body: "OK"
+      }))
   }
 
   const { pathname, searchParams } = request.nextUrl ? request.nextUrl : new URL(request.url);
