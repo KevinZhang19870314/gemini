@@ -14,7 +14,7 @@ const pickHeaders = (headers: Headers, keys: (string | RegExp)[]): Headers => {
 };
 
 const CORS_HEADERS: Record<string, string> = {
-  "access-control-allow-credentials": true,
+  "access-control-allow-credentials": "true",
   "access-control-allow-origin": "*",
   "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
   "access-control-allow-headers": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
