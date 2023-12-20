@@ -13,7 +13,7 @@ const pickHeaders = (headers: Headers, keys: (string | RegExp)[]): Headers => {
   return picked;
 };
 
-export default async function handleRequest(request: NextRequest & { nextUrl?: URL }, response: NextResponse) {
+export default async function handleRequest(request: NextRequest & { nextUrl?: URL }, res: NextResponse) {
   const CORS_HEADERS: Record<string, string> = {
     "Access-Control-Allow-Origin": request.headers.get("origin") || "*",
     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
@@ -26,7 +26,7 @@ export default async function handleRequest(request: NextRequest & { nextUrl?: U
   //   });
   // }
   if(req.method === 'OPTIONS') {
-      return response.status(200).json(({
+      return res.status(200).json(({
           body: "OK"
       }))
   }
