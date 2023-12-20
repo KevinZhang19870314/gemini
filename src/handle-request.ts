@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 
 const pickHeaders = (headers: Headers, keys: (string | RegExp)[]): Headers => {
   const picked = new Headers();
@@ -13,22 +13,17 @@ const pickHeaders = (headers: Headers, keys: (string | RegExp)[]): Headers => {
   return picked;
 };
 
-export default async function handleRequest(request: NextRequest & { nextUrl?: URL }, res: NextResponse) {
+export default async function handleRequest(request: NextRequest & { nextUrl?: URL }) {
   const CORS_HEADERS: Record<string, string> = {
     "Access-Control-Allow-Origin": request.headers.get("origin") || "*",
     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type, Authorization",
   };
   
-  // if (request.method === "OPTIONS") {
-  //   return new Response(null, {
-  //     headers: CORS_HEADERS,
-  //   });
-  // }
-  if(request.method === 'OPTIONS') {
-      return res.status(200).json(({
-          body: "OK"
-      }))
+  if (request.method === "OPTIONS") {
+    return new Response('success', {
+      headers: CORS_HEADERS,
+    });
   }
 
   const { pathname, searchParams } = request.nextUrl ? request.nextUrl : new URL(request.url);
