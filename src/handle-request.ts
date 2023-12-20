@@ -23,6 +23,7 @@ export default async function handleRequest(request: NextRequest & { nextUrl?: U
   if (request.method === "OPTIONS") {
     return new Response('success', {
       headers: CORS_HEADERS,
+      status: 200
     });
   }
 
