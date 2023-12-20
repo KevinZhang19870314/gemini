@@ -13,13 +13,13 @@ const pickHeaders = (headers: Headers, keys: (string | RegExp)[]): Headers => {
   return picked;
 };
 
-const CORS_HEADERS: Record<string, string> = {
-  "Access-Control-Allow-Origin": req.headers.origin || "*",
-  "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-  "Access-Control-Allow-Headers": "Content-Type, Authorization",
-};
-
 export default async function handleRequest(request: NextRequest & { nextUrl?: URL }) {
+  const CORS_HEADERS: Record<string, string> = {
+    "Access-Control-Allow-Origin": request.headers.origin || "*",
+    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+  };
+  
   if (request.method === "OPTIONS") {
     return new Response(null, {
       headers: CORS_HEADERS,
