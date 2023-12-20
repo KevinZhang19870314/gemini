@@ -25,7 +25,7 @@ export default async function handleRequest(request: NextRequest & { nextUrl?: U
   //     headers: CORS_HEADERS,
   //   });
   // }
-  if(req.method === 'OPTIONS') {
+  if(request.method === 'OPTIONS') {
       return res.status(200).json(({
           body: "OK"
       }))
